@@ -39,10 +39,16 @@
 }
 </script>
 <style>
+.mainDiv{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .image-select {
-    position: absolute;
-    top: 0px;
-    left: 0px;
     border: 1px solid #cccccc;
 }
 
@@ -380,7 +386,7 @@
     width: 48px;
 }
 </style>
-
+<div class="mainDiv">
 <div class="image-select">
     <div class="image-select-payload">
         <div class=".rc-imageselect-instructions">
@@ -618,4 +624,5 @@
         </div>
         <div class="rc-challenge-help" style="display:none" tabindex="0"></div>
     </div>
+</div>
 </div>
