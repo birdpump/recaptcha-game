@@ -4,6 +4,7 @@
     const dispatch = createEventDispatcher();
 
     function switchVeiw() {
+        alert("testtest")
         dispatch('switch');
     }
 
