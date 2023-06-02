@@ -5,7 +5,7 @@
 </svelte:head>
 
 <script>
-	let imgSrc = './assets/bike.jpg'
+	let imgSrc = './bike.jpg'
 	function submit(){
 		getVal(this);
 	}
