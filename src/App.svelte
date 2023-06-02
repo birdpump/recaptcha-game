@@ -6,10 +6,10 @@ import Captcha from "./lib/Captcha.svelte";
 
 let selected = MainPage;
 function handleMessage(){
-  selected = Loading;
   if(selected = Loading){
     selected = Captcha;
   }
+  selected = Loading;
 }
 </script>
 
