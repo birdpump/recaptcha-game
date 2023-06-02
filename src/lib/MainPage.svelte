@@ -3,7 +3,7 @@
 
     const dispatch = createEventDispatcher();
 
-    function sayHello() {
+    function switchVeiw() {
         dispatch('switch');
     }
 
@@ -58,5 +58,5 @@
 		<div class="text">Fast Captcha</div>
 		
 		<div class="instruct">Your objective is to complete the Recaptchas as quickly and accurately as possible. Be careful! Selecting the wrong objects will result in a score penalty. The faster and more accurately you complete the Recaptchas, the higher your score will be.</div>
-	<div class="start" on:click={sayHello}>Start Game</div>
+	<div class="start" on:click={switchVeiw}>Start Game</div>
 </div>
