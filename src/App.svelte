@@ -5,6 +5,7 @@ import Loading from "./lib/Loading.svelte";
 
 let selected = MainPage;
 function handleMessage(){
+  alert("new")
   selected = Loading;
   if(selected = Loading){
     alert("next page");
@@ -13,4 +14,4 @@ function handleMessage(){
 </script>
 
 
-<svelte:component this={selected} on:message={handleMessage}/>
+<svelte:component this={selected} on:switch={handleMessage}/>
