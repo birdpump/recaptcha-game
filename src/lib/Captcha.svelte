@@ -5,7 +5,7 @@
 </svelte:head>
 
 <script>
-	let imgSrc = "https://i.pcmag.com/imagery/articles/01IB0rgNa4lGMBlmLyi0VP6-6..v1611346416.png"
+	let imgSrc = "/assets/bike2.jpg"
 	function submit(){
 		getVal(this);
 	}
