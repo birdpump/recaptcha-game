@@ -7,7 +7,9 @@
     const dispatch = createEventDispatcher();
 
     function switchVeiw() {
-        dispatch('switch');
+        dispatch('switch', {
+			veiw: 2
+		});
     }
 
 
