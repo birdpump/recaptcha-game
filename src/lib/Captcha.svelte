@@ -1,0 +1,621 @@
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+</svelte:head>
+
+<script>
+	let imgSrc = "https://i.pcmag.com/imagery/articles/01IB0rgNa4lGMBlmLyi0VP6-6..v1611346416.png"
+	function submit(){
+		getVal(this);
+	}
+	
+	function handleClick(){
+		if (this.children[0].children[0].classList.contains("rc-image-tile-wrapper-act")) {
+        this.children[0].children[0].classList.remove("rc-image-tile-wrapper-act");
+        this.children[0].children[1].style.display = "none";
+        this.dataset.btnact = "0";
+    } else {
+        this.children[0].children[0].classList.add("rc-image-tile-wrapper-act");
+        this.children[0].children[1].style.display = "block";
+        this.dataset.btnact = "1";
+    }
+	}
+	
+	function getVal(){
+		let elements = document.querySelectorAll('.rc-imageselect-tile');
+// 		elements.forEach((item) => {
+//   			console.log(item.dataset.btnact);
+// 		});
+		
+		let arr2 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		let test = true;
+		for (let i = 0; i < elements.length; i++) {
+			if (parseInt(elements[i].dataset.btnact) !== arr2[i]) {
+				test = false;
+			}
+		}
+		console.log(test);
+}
+</script>
+<style>
+.image-select {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: 1px solid #cccccc;
+}
+
+
+.imgt {
+    border-collapse: separate;
+    border-spacing: 0 0;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 388px;
+    margin: -1px;
+    text-align: center;
+    transition-delay: 0s;
+    transition-duration: 1s;
+    transition-property: all;
+    transition-timing-function: ease;
+    width: 388px;
+}
+
+
+.image-select-payload {
+    font-family: Roboto, helvetica, arial, sans-serif;
+    margin: 0 7px;
+    min-width: 240px;
+    padding: 7px 0;
+}
+
+.rc-imageselect-instructions {
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 113px;
+    margin-bottom: 7px;
+    position: relative;
+    width: 386px;
+}
+
+.rc-imageselect-desc-wrapper {
+    background-color: rgb(26, 115, 232);
+    color: rgb(255, 255, 255);
+    font-family: Roboto, helvetica, arial, sans-serif;
+    font-size: 16px;
+    height: 66px;
+    margin-bottom: 6px;
+    padding: 24px;
+    position: relative;
+}
+
+.rc-imageselect-desc-no-canonical {
+    color: white;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    font-size: 16px;
+    position: relative;
+    font-weight: 400;
+}
+
+.rc-imageselect-carousel-instructions {
+    color: rgb(255, 255, 255);
+    display: block;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 1;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: all;
+    transition-timing-function: ease;
+}
+
+.rc-imageselect-tile {
+    border-collapse: separate;
+    border-spacing: 0 0;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 1px;
+    text-align: center;
+    transform: scale(1.0);
+}
+
+.rc-imageselect-target {
+    border-collapse: separate;
+    border-spacing: 0 0;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    position: relative;
+    text-align: center;
+
+}
+
+:global(.rc-image-tile-wrapper) {
+    border-collapse: separate;
+    border-spacing: 0 0;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 95px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    text-align: center;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transition-delay: 0s;
+    transition-duration: 0.1s;
+    transition-property: all;
+    transition-timing-function: ease;
+    width: 95px;
+}
+
+:global(.rc-image-tile-wrapper-act) {
+    transform: scale(0.8);
+}
+
+.rc-imageselect-checkbox {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAGnmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNy4xLWMwMDAgNzkuZGFiYWNiYiwgMjAyMS8wNC8xNC0wMDozOTo0NCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIzLjAgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIxLTExLTA0VDIzOjE2OjI2LTA3OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMS0xMS0wNFQyMzoxNzozNS0wNzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMS0xMS0wNFQyMzoxNzozNS0wNzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDM3Y2M2MTEtMjg5Mi00MmFkLWEyYmYtMjk1MzA4NGYxNjA1IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YjEwZGYyNmItNGU5Mi0wNTQxLThjMDYtMTJjNWQ5ZDFmMjcxIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6ZjE0YzAyYmQtNDJhOC00ODkxLWIxMjMtMWZhYjg2NzZlNzJmIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpmMTRjMDJiZC00MmE4LTQ4OTEtYjEyMy0xZmFiODY3NmU3MmYiIHN0RXZ0OndoZW49IjIwMjEtMTEtMDRUMjM6MTY6MjYtMDc6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMy4wIChNYWNpbnRvc2gpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjMDJkMDg2Zi1mNmZjLTRjMzItYWU2Zi0wOWMxZmU4MzFhNzciIHN0RXZ0OndoZW49IjIwMjEtMTEtMDRUMjM6MTc6MDktMDc6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMy4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo0MzdjYzYxMS0yODkyLTQyYWQtYTJiZi0yOTUzMDg0ZjE2MDUiIHN0RXZ0OndoZW49IjIwMjEtMTEtMDRUMjM6MTc6MzUtMDc6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMy4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlXsutAAAASdSURBVFiFtZdbbBRVGIC/mdnZdndr2+0l0BYsaEJ4ABGkUhHjlT6oT7QRbcHaqGkhvFBjBU3AKy9aTYwaQ9pI6wMxEClQiLcmKomtYikCkZsILbYGWuh2aXfLtrvHh53ZPTvdbbdtPMnJzOzMme87/392zjkKyRdFOipx7gupJlWEENiSBCuACij3bfgmx5G+dGUQez4h3S1CwQGh+PoGvcd+u7C3fAgITUcmXk/igbVVNdcrbJqr6nLqrTWJGiz03/FDaHxwd/vueYeAoEVmQhFCJBSIgIuqLxT3pqX/NFVPYkVc7UHl/JaOT1eesYgkJaAAGmArfvnqxp50ffd04HJZMDJS9svnd7cC4/EkhBCoieAP1HRXzgYOcMXl2l+8+exTgI4xhqzPKJZzFdDvf6lz9T8ZBW2zgcsl33N6xe+Na//EEglrBMK9z8qyzxZecY+bLytzIte6fdVHhKOgYYmCKWD23lZUdrxiNvANy9y8W67z2FKNPRvDEt1O38PF1Z0lhkBMKmQBDdB1LadqpvCNy9y885yO3aYwMio4+Ot45J6iFlYRZyyYFyqgLSjZlXfF6S+aCfz5e928bcCHRwV1zQEOXPBE7nc7x592Fj7kwpIGVTpqcwufKJ4p/K1no/DXmgK0SHCzLH70jWVY0mCehFNgc+TLDdbkZtCxLZeaVe6E8MrlUfgtv6CuKUDLxYlwAJuWMY9oBGIEVEBDOHPkBjvK7czPUXm9VGdTHIkXlrt5c30s/GACeNjAkS1FAOQTQEH1euXn61vGuDks0FSF7aU6m4qjElUr3Ow04F4DfuivSeCACHq9Uu8VIDIbKoAyFhi6hiMv0uDbbg+iMZP6F+1kpSlsX6ej4MYfgJ3rdXQtCj88BRzgtvff69bf5AiI/vNHTlkf+O6qh9rGADduhSOxbZ0ehfsEdXuSgwP83fHJ2UQCAhA9x97vi9fw+6setjYEGDAkTPirTQEOX0oOXjgifh7uOebDMj2rxkXIqMF5Q5d2xXtBW6+HWkNiyCd45YsArUnCAfy+E18TOxcIiA4GHUgF0uxpc7Jyqv84nehFjxdkkmKHo5eThwP01c9dDHiBYWAUGBdCCDMFIcNuLDB8zZfV07Y50Yvaej3ThrvO7i0HAsAYlhlRTkHQeCBwZl/FjwVDlz6eFiVBmdN/YsfFo1u7gNvG+2MWJvIgNAVGAf/xhgcb5nsvfzYb+NyBk+91NT95APBLAkFZQJ6bVcLfhVTACbgA15Ky5rU3C0s+mC48/dz+6nNHtrQDI4TzbkqYKZiwJoysiIAUQ8IJOFPdCzOXlDaV92UsqpkKnHfj5Ienvnpm35jfOwz4jCpHIGZFZF2jRdYFhkQq4DCOqYB+5+raRdl3PbJET8nO1VRH+nhoZHBsdGCg/1xrV29nYzfhwXbbgPoJp9TseUz4E62KVaLpsBsiZrUTXVrJX9HIv0gSMKs58mPgpkC8nZF1ZxP5dxhSkwmYEnJNuC+AqXdGZjS0ONX8iMmiZjV7POOdUTwRWUieUuVomZ90wSS9nq6ALCLvkM2jCZGPSe2QhRAoQiS9m/5fyn/lu/UIgBExrQAAAABJRU5ErkJggg==");
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: no-repeat;
+    background-size: auto;
+    border-collapse: separate;
+    border-spacing: 0 0;
+    bottom: 0;
+    display: block;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.rc-image-tile-44 {
+    backface-visibility: hidden;
+    border-collapse: separate;
+    border-spacing: 0 0;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 380px;
+    left: 0;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 380px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.rc-controls {
+    width: 400px;
+}
+
+.primary-controls {
+    height: 60px;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    border-top: 1px solid #cccccc;
+}
+
+
+.verify-button-holder {
+    float: right;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    margin: 9px 8px 9px 0;
+}
+
+.rc-button-default {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgb(26, 115, 232);
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-size: auto;
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-style: none;
+    border-bottom-width: 0;
+    border-image-repeat: stretch;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(255, 255, 255);
+    border-left-style: none;
+    border-left-width: 0;
+    border-right-color: rgb(255, 255, 255);
+    border-right-style: none;
+    border-right-width: 0;
+    border-top-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    border-top-style: none;
+    border-top-width: 0;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    height: 42px;
+    line-height: 42px;
+    min-width: 100px;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    transition-delay: 0s;
+    transition-duration: 0.5s;
+    transition-property: all;
+    transition-timing-function: ease;
+}
+
+.goog-inline-block {
+    position: relative;
+    display: -moz-inline-box;
+    display: inline-block;
+}
+
+.button-holder {
+    float: left;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 48px;
+}
+
+.rc-buttons {
+    background-repeat: no-repeat;
+    float: left;
+    font-family: Roboto, helvetica, arial, sans-serif;
+    height: 48px;
+    margin: 6px 0 6px 6px;
+}
+
+
+.rc-button-reload {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("https://www.gstatic.com/recaptcha/api2/refresh_2x.png");
+    background-origin: padding-box;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    border-bottom-color: rgb(0, 0, 0);
+    border-bottom-style: none;
+    border-bottom-width: 0;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-source: none;
+    border-left-color: rgb(0, 0, 0);
+    border-left-style: none;
+    border-left-width: 0;
+    border-right-color: rgb(0, 0, 0);
+    border-right-style: none;
+    border-right-width: 0;
+    border-top-color: rgb(0, 0, 0);
+    border-top-style: none;
+    border-top-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 48px;
+    opacity: 0.55;
+    outline: rgb(0, 0, 0) none 0;
+    padding: 0;
+    position: relative;
+    width: 48px;
+}
+
+.rc-button:hover {
+    opacity: .8;
+    outline: none;
+}
+
+.rc-button-audio {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("https://www.gstatic.com/recaptcha/api2/audio_2x.png");
+    background-origin: padding-box;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    border-bottom-color: rgb(0, 0, 0);
+    border-bottom-style: none;
+    border-bottom-width: 0;
+    border-image-repeat: stretch;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(0, 0, 0);
+    border-left-style: none;
+    border-left-width: 0;
+    border-right-color: rgb(0, 0, 0);
+    border-right-style: none;
+    border-right-width: 0;
+    border-top-color: rgb(0, 0, 0);
+    border-top-style: none;
+    border-top-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 48px;
+    opacity: 0.55;
+    outline: rgb(0, 0, 0) none 0;
+    padding: 0;
+    position: relative;
+    width: 48px;
+}
+
+.rc-button-help {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("https://www.gstatic.com/recaptcha/api2/info_2x.png");
+    background-origin: padding-box;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    border-bottom-color: rgb(0, 0, 0);
+    border-bottom-style: none;
+    border-bottom-width: 0;
+    border-image-repeat: stretch;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(0, 0, 0);
+    border-left-style: none;
+    border-left-width: 0;
+    border-right-color: rgb(0, 0, 0);
+    border-right-style: none;
+    border-right-width: 0;
+    border-top-color: rgb(0, 0, 0);
+    border-top-style: none;
+    border-top-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 48px;
+    opacity: 0.55;
+    padding: 0 0 0 0;
+    position: relative;
+    width: 48px;
+}
+</style>
+
+<div class="image-select">
+    <div class="image-select-payload">
+        <div class=".rc-imageselect-instructions">
+            <div class="rc-imageselect-desc-wrapper">
+                <div class="rc-imageselect-desc-no-canonical">
+                    Select all squares with
+                    <strong style="font-size: 28px; display: block">traffic lights</strong>
+                    <!--                    <span class="rc-imageselect-carousel-instructions">If there are none, click skip</span>-->
+                </div>
+            </div>
+        </div>
+
+
+        <table class="imgt">
+            <tbody>
+            <tr>
+                <td tabindex="4" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:0%; left: 0%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="5" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:0%; left: -100%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="6" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:0%; left: -200%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="7" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:0%; left: -300%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td tabindex="8" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-100%; left: 0%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="9" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-100%; left: -100%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="10" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-100%; left: -200%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="11" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-100%; left: -300%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td tabindex="12" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-200%; left: 0%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="13" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-200%; left: -100%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="14" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-200%; left: -200%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="15" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-200%; left: -300%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td tabindex="16" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-300%; left: 0%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="17" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-300%; left: -100%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="18" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-300%; left: -200%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+                <td tabindex="19" class="rc-imageselect-tile" data-btnact="0" on:click={handleClick}>
+                    <div class="rc-image-tile-target">
+                        <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                                class="rc-image-tile-44"
+                                src={imgSrc} alt=""
+                                style="top:-300%; left: -300%">
+                            <div class="rc-image-tile-overlay"></div>
+                        </div>
+                        <div class="rc-imageselect-checkbox" style="display: none"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="rc-separator"></div>
+    <div class="rc-controls">
+        <div class="primary-controls">
+            <div class="rc-buttons">
+                <div class="button-holder reload-button-holder">
+                    <button class="rc-button goog-inline-block rc-button-reload" title="Get a new challenge" value=""
+                            id="recaptcha-reload-button" tabindex="3"></button>
+                </div>
+                <div class="button-holder audio-button-holder">
+                    <button class="rc-button goog-inline-block rc-button-audio" title="Get an audio challenge" value=""
+                            id="recaptcha-audio-button" tabindex="1"></button>
+                </div>
+                <div class="button-holder image-button-holder">
+                    <button class="rc-button goog-inline-block rc-button-image" title="Get a visual challenge" value=""
+                            style="display: none;" id="recaptcha-image-button" tabindex="0"></button>
+                </div>
+                <div class="button-holder help-button-holder">
+                    <button class="rc-button goog-inline-block rc-button-help" title="Help" value=""
+                            id="recaptcha-help-button" tabindex="2"></button>
+                </div>
+                <div class="button-holder undo-button-holder">
+                    <button class="rc-button goog-inline-block rc-button-undo" title="Undo" value=""
+                            style="display: none;"
+                            id="recaptcha-undo-button" tabindex="0"></button>
+                </div>
+            </div>
+            <div class="verify-button-holder">
+                <button class="rc-button-default goog-inline-block" title="" value="" id="recaptcha-verify-button" on:click={submit}
+                        tabindex="0">Verify
+                </button>
+            </div>
+        </div>
+        <div class="rc-challenge-help" style="display:none" tabindex="0"></div>
+    </div>
+</div>
