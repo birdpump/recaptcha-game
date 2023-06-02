@@ -27,7 +27,7 @@
 	.text{
 		font-size: 30px;
 		font-family: Roboto, sans-serif;
-    color: white;
+        color: white;
 /* 		margin-bottom: 10px; */
 	}
 	
@@ -51,6 +51,8 @@
 	.instruct{
 		width: 50%;
 		text-align: center;
+        font-family: Roboto, sans-serif;
+        font-size: 16px;
 		color: white;
 	}
 </style>
