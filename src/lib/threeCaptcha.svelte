@@ -125,18 +125,19 @@
         border-spacing: 0 0;
         font-family: Roboto, helvetica, arial, sans-serif;
         margin: 0;
-        padding: 1px;
+        /*padding: 1px;*/
         text-align: center;
         transform: scale(1.0);
     }
 
-    .rc-imageselect-target {
+    .rc-image-tile-target {
         border-collapse: separate;
         border-spacing: 0 0;
         font-family: Roboto, helvetica, arial, sans-serif;
         position: relative;
         text-align: center;
-
+        width: 126px;
+        height: 126px;
     }
 
     :global(.rc-image-tile-wrapper) {
@@ -410,7 +411,7 @@
                 <tr>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="4">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:0%; left: 0%">
@@ -421,7 +422,7 @@
                     </td>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="5">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:0%; left: -100%">
@@ -430,23 +431,12 @@
                             <div class="rc-imageselect-checkbox" style="display: none"></div>
                         </div>
                     </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="6">
+                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="6" >
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:0%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="7">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:0%; left: -300%">
                                 <div class="rc-image-tile-overlay"></div>
                             </div>
                             <div class="rc-imageselect-checkbox" style="display: none"></div>
@@ -456,7 +446,7 @@
                 <tr>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="8">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-100%; left: 0%">
@@ -467,7 +457,7 @@
                     </td>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="9">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-100%; left: -100%">
@@ -478,21 +468,10 @@
                     </td>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="10">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-100%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="11">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-100%; left: -300%">
                                 <div class="rc-image-tile-overlay"></div>
                             </div>
                             <div class="rc-imageselect-checkbox" style="display: none"></div>
@@ -502,7 +481,7 @@
                 <tr>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="12">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-200%; left: 0%">
@@ -513,7 +492,7 @@
                     </td>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="13">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-200%; left: -100%">
@@ -524,67 +503,10 @@
                     </td>
                     <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="14">
                         <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
+                            <div class="rc-image-tile-wrapper" style="width: 126px; height: 126px"><img
                                     alt=""
                                     class="rc-image-tile-44" src={imgSrc}
                                     style="top:-200%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="15">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-200%; left: -300%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="16">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: 0%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="17">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -100%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="18">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
-                            </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="19">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -300%">
                                 <div class="rc-image-tile-overlay"></div>
                             </div>
                             <div class="rc-imageselect-checkbox" style="display: none"></div>
