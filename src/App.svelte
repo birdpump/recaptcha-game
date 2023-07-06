@@ -3,7 +3,7 @@
 import MainPage from "./lib/MainPage.svelte";
 import Loading from "./lib/Loading.svelte";
 import Captcha from "./lib/Captcha.svelte";
-import threeCaptcha from "./lib/threeCaptcha.svelte";
+// import threeCaptcha from "./lib/threeCaptcha.svelte";
 
 let selected;
 selected = MainPage;
