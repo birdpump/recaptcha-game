@@ -11,7 +11,7 @@ function handleMessage(event){
   if(event.detail.veiw == 1){
     selected = Loading;
   }else if(event.detail.veiw == 2){
-    selected = threeCaptcha;
+    selected = Captcha;
   }
   
 }
