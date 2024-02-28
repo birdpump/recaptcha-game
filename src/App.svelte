@@ -8,9 +8,9 @@ import Captcha from "./lib/Captcha.svelte";
 let selected;
 selected = MainPage;
 function handleMessage(event){
-  if(event.detail.veiw == 1){
+  if(event.detail.veiw === 1){
     selected = Loading;
-  }else if(event.detail.veiw == 2){
+  }else if(event.detail.veiw === 2){
     selected = Captcha;
   }
   

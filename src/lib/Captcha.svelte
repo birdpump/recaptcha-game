@@ -5,8 +5,57 @@
 </svelte:head>
 
 <script>
-    let imgSrc = './bike.jpg'
+    import {imgData} from "./assets/data.js";
+
+    import { onMount } from 'svelte';
     import {fade} from 'svelte/transition';
+
+    let mainScore;
+
+    let imgSrc;
+    let index = 0;
+
+    let elapsedTime = 0;
+    let interval;
+
+    const imageList = ["bicycles-1.jpg", "bicycles-10.jpg", "bicycles-11.jpg", "bicycles-12.jpg", "bicycles-2.jpg", "bicycles-3.jpg", "bicycles-4.jpg", "bicycles-5.jpg", "bicycles-6.jpg", "bicycles-7.jpg", "bicycles-8.jpg", "bicycles-9.jpg", "buses-1.jpg", "buses-2.jpg", "buses-3.jpg", "buses-4.jpg", "buses-5.jpg", "buses-6.jpg", "buses-7.jpg", "buses-8.jpg", "crosswalks-1.jpg", "crosswalks-2.jpg", "crosswalks-3.jpg", "crosswalks-4.jpg", "crosswalks-5.jpg", "firehydrant-1.jpg", "firehydrant-2.jpg", "firehydrant-3.jpg", "firehydrant-4.jpg", "motorcycle-1.jpg", "motorcycle-10.jpg", "motorcycle-11.jpg", "motorcycle-12.jpg", "motorcycle-13.jpg", "motorcycle-14.jpg", "motorcycle-15.jpg", "motorcycle-16.jpg", "motorcycle-17.jpg", "motorcycle-2.jpg", "motorcycle-3.jpg", "motorcycle-4.jpg", "motorcycle-5.jpg", "motorcycle-6.jpg", "motorcycle-7.jpg", "motorcycle-8.jpg", "motorcycle-9.jpg", "stairs-1.jpg", "stairs-2.jpg", "stairs-3.jpg", "stairs-4.jpg", "stairs-5.jpg", "trafficlights-1.jpg", "trafficlights-10.jpg", "trafficlights-11.jpg", "trafficlights-12.jpg", "trafficlights-13.jpg", "trafficlights-14.jpg", "trafficlights-15.jpg", "trafficlights-2.jpg", "trafficlights-3.jpg", "trafficlights-4.jpg", "trafficlights-5.jpg", "trafficlights-6.jpg", "trafficlights-7.jpg", "trafficlights-8.jpg", "trafficlights-9.jpg"];
+    onMount(() => {
+        genRandom();
+        interval = setInterval(() => {
+            elapsedTime += 1; // Increment the elapsed time by 1 millisecond
+        }, 1); // Update every millisecond
+        // Cleanup on component unmount
+        return () => clearInterval(interval);
+    });
+
+    function formatTime(milliseconds) {
+        const minutes = Math.floor(milliseconds / (60 * 1000)).toString().padStart(2, '0');
+        const seconds = Math.floor((milliseconds / 1000) % 60).toString().padStart(2, '0');
+        const ms = Math.floor(milliseconds % 1000).toString().padStart(3, '0');
+        return `${minutes}:${seconds}.${ms}`;
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            // Enter key pressed, handle the action here
+            submit();
+            // Add your logic here
+        }
+    }
+
+    function genRandom(){
+        const randomIndex = Math.floor(Math.random() * imageList.length);
+        imgSrc = imageList[randomIndex];
+        index = randomIndex;
+        imgSrc = `./images/${imgSrc}`
+        console.log(imgSrc)
+    }
+
+    // $: imgSrc = `./images/${imageList[index]}`
+
+    function news(){
+        index++;
+    }
 
     function submit() {
         getVal(this);
@@ -26,18 +75,43 @@
 
     function getVal() {
         let elements = document.querySelectorAll('.rc-imageselect-tile');
-// 		elements.forEach((item) => {
-//   			console.log(item.dataset.btnact);
-// 		});
 
-        let arr2 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let arr2 = imgData[imageList[index]];
+
         let test = true;
+
+        let error = 0;
+        let total = 0;
+
         for (let i = 0; i < elements.length; i++) {
+            if (arr2[i] === 1) {
+                total++;
+            }
+
             if (parseInt(elements[i].dataset.btnact) !== arr2[i]) {
+                error++;
                 test = false;
             }
         }
-        console.log(test);
+        console.log((error/total)*100);
+        // console.log(error);
+        reset();
+    }
+
+
+    function reset(){
+        elapsedTime = 0;
+        let elements = document.querySelectorAll('.rc-imageselect-tile');
+
+        elements.forEach(element => {
+            // Remove class
+            element.children[0].children[0].classList.remove("rc-image-tile-wrapper-act");
+            // Update style
+            element.children[0].children[1].style.display = "none";
+            // Update dataset
+            element.dataset.btnact = "0";
+        });
+        genRandom();
     }
 </script>
 <style>
@@ -49,6 +123,12 @@
         align-items: center;
         justify-content: center;
         background-color: #282C34;
+    }
+
+    p{
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
     }
 
     .image-select {
@@ -391,7 +471,8 @@
         width: 48px;
     }
 </style>
-<div class="mainDiv">
+<div class="mainDiv" on:keydown={handleKeyPress}>
+    <p>{formatTime(elapsedTime)}</p>
     <div class="image-select" in:fade="{{delay: 0, duration: 200}}">
         <div class="image-select-payload">
             <div class=".rc-imageselect-instructions">
@@ -419,7 +500,7 @@
                             <div class="rc-imageselect-checkbox" style="display: none"></div>
                         </div>
                     </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="5">
+                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="5" >
                         <div class="rc-image-tile-target">
                             <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
                                     alt=""
@@ -602,7 +683,8 @@
                     <div class="button-holder reload-button-holder">
                         <button class="rc-button goog-inline-block rc-button-reload" id="recaptcha-reload-button"
                                 tabindex="3"
-                                title="Get a new challenge" value=""></button>
+                                title="Get a new challenge" value=""
+                                on:click={news}></button>
                     </div>
                     <div class="button-holder audio-button-holder">
                         <button class="rc-button goog-inline-block rc-button-audio" id="recaptcha-audio-button"
