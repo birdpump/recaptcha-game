@@ -1,14 +1,8 @@
-<svelte:head>
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
-</svelte:head>
-
 <script>
-    import {imgData} from "./assets/data.js";
+    import { imgData } from "./assets/data.js";
 
-    import { onMount } from 'svelte';
-    import {fade} from 'svelte/transition';
+    import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
 
     let mainScore;
 
@@ -16,13 +10,80 @@
     let index = 0;
 
     let titleSelect = "test";
-    
-    
 
     let elapsedTime = 0;
     let interval;
 
-    const imageList = ["bicycles-1.jpg", "bicycles-10.jpg", "bicycles-11.jpg", "bicycles-12.jpg", "bicycles-2.jpg", "bicycles-3.jpg", "bicycles-4.jpg", "bicycles-5.jpg", "bicycles-6.jpg", "bicycles-7.jpg", "bicycles-8.jpg", "bicycles-9.jpg", "buses-1.jpg", "buses-2.jpg", "buses-3.jpg", "buses-4.jpg", "buses-5.jpg", "buses-6.jpg", "buses-7.jpg", "buses-8.jpg", "crosswalks-1.jpg", "crosswalks-2.jpg", "crosswalks-3.jpg", "crosswalks-4.jpg", "crosswalks-5.jpg", "firehydrant-1.jpg", "firehydrant-2.jpg", "firehydrant-3.jpg", "firehydrant-4.jpg", "motorcycle-1.jpg", "motorcycle-10.jpg", "motorcycle-11.jpg", "motorcycle-12.jpg", "motorcycle-13.jpg", "motorcycle-14.jpg", "motorcycle-15.jpg", "motorcycle-16.jpg", "motorcycle-17.jpg", "motorcycle-2.jpg", "motorcycle-3.jpg", "motorcycle-4.jpg", "motorcycle-5.jpg", "motorcycle-6.jpg", "motorcycle-7.jpg", "motorcycle-8.jpg", "motorcycle-9.jpg", "stairs-1.jpg", "stairs-2.jpg", "stairs-3.jpg", "stairs-4.jpg", "stairs-5.jpg", "trafficlights-1.jpg", "trafficlights-10.jpg", "trafficlights-11.jpg", "trafficlights-12.jpg", "trafficlights-13.jpg", "trafficlights-14.jpg", "trafficlights-15.jpg", "trafficlights-2.jpg", "trafficlights-3.jpg", "trafficlights-4.jpg", "trafficlights-5.jpg", "trafficlights-6.jpg", "trafficlights-7.jpg", "trafficlights-8.jpg", "trafficlights-9.jpg"];
+    let finalScoreMain;
+
+    const imageList = [
+        "bicycles-1.jpg",
+        "bicycles-10.jpg",
+        "bicycles-11.jpg",
+        "bicycles-12.jpg",
+        "bicycles-2.jpg",
+        "bicycles-3.jpg",
+        "bicycles-4.jpg",
+        "bicycles-5.jpg",
+        "bicycles-6.jpg",
+        "bicycles-7.jpg",
+        "bicycles-8.jpg",
+        "bicycles-9.jpg",
+        "buses-1.jpg",
+        "buses-2.jpg",
+        "buses-3.jpg",
+        "buses-4.jpg",
+        "buses-5.jpg",
+        "buses-6.jpg",
+        "buses-7.jpg",
+        "buses-8.jpg",
+        "crosswalks-1.jpg",
+        "crosswalks-2.jpg",
+        "crosswalks-3.jpg",
+        "crosswalks-4.jpg",
+        "crosswalks-5.jpg",
+        "firehydrant-1.jpg",
+        "firehydrant-2.jpg",
+        "firehydrant-3.jpg",
+        "firehydrant-4.jpg",
+        "motorcycle-1.jpg",
+        "motorcycle-10.jpg",
+        "motorcycle-11.jpg",
+        "motorcycle-12.jpg",
+        "motorcycle-13.jpg",
+        "motorcycle-14.jpg",
+        "motorcycle-15.jpg",
+        "motorcycle-16.jpg",
+        "motorcycle-17.jpg",
+        "motorcycle-2.jpg",
+        "motorcycle-3.jpg",
+        "motorcycle-4.jpg",
+        "motorcycle-5.jpg",
+        "motorcycle-6.jpg",
+        "motorcycle-7.jpg",
+        "motorcycle-8.jpg",
+        "motorcycle-9.jpg",
+        "stairs-1.jpg",
+        "stairs-2.jpg",
+        "stairs-3.jpg",
+        "stairs-4.jpg",
+        "stairs-5.jpg",
+        "trafficlights-1.jpg",
+        "trafficlights-10.jpg",
+        "trafficlights-11.jpg",
+        "trafficlights-12.jpg",
+        "trafficlights-13.jpg",
+        "trafficlights-14.jpg",
+        "trafficlights-15.jpg",
+        "trafficlights-2.jpg",
+        "trafficlights-3.jpg",
+        "trafficlights-4.jpg",
+        "trafficlights-5.jpg",
+        "trafficlights-6.jpg",
+        "trafficlights-7.jpg",
+        "trafficlights-8.jpg",
+        "trafficlights-9.jpg",
+    ];
     onMount(() => {
         // pre load images
         for (let i = 0; i < imageList.length; i++) {
@@ -39,7 +100,7 @@
     });
 
     function formatTime(milliseconds) {
-        const number = (milliseconds / 100).toFixed(2)
+        const number = (milliseconds / 100).toFixed(2);
         return `${number}`;
     }
 
@@ -51,24 +112,25 @@
         }
     }
 
-    function genRandom(){
+    function genRandom() {
         const randomIndex = Math.floor(Math.random() * imageList.length);
         imgSrc = imageList[randomIndex];
         index = randomIndex;
-        imgSrc = `./images/${imgSrc}`
-        console.log(imgSrc)
+        imgSrc = `./images/${imgSrc}`;
+        console.log(imgSrc);
     }
 
-    $: if(imageList[index].includes("bicycles")) titleSelect = "Bicycles";
-    $: if(imageList[index].includes("buses")) titleSelect = "Buses";
-    $: if(imageList[index].includes("crosswalks")) titleSelect = "Crosswalks";
-    $: if(imageList[index].includes("firehydrant")) titleSelect = "Fire Hydrant";
-    $: if(imageList[index].includes("motorcycle")) titleSelect = "Motorcycles";
-    $: if(imageList[index].includes("stairs")) titleSelect = "Stairs";
-    $: if(imageList[index].includes("trafficlights")) titleSelect = "Traffic Lights";
+    $: if (imageList[index].includes("bicycles")) titleSelect = "Bicycles";
+    $: if (imageList[index].includes("buses")) titleSelect = "Buses";
+    $: if (imageList[index].includes("crosswalks")) titleSelect = "Crosswalks";
+    $: if (imageList[index].includes("firehydrant"))
+        titleSelect = "Fire Hydrant";
+    $: if (imageList[index].includes("motorcycle")) titleSelect = "Motorcycles";
+    $: if (imageList[index].includes("stairs")) titleSelect = "Stairs";
+    $: if (imageList[index].includes("trafficlights"))
+        titleSelect = "Traffic Lights";
 
-
-    function news(){
+    function news() {
         index++;
     }
 
@@ -77,19 +139,27 @@
     }
 
     function handleClick() {
-        if (this.children[0].children[0].classList.contains("rc-image-tile-wrapper-act")) {
-            this.children[0].children[0].classList.remove("rc-image-tile-wrapper-act");
+        if (
+            this.children[0].children[0].classList.contains(
+                "rc-image-tile-wrapper-act",
+            )
+        ) {
+            this.children[0].children[0].classList.remove(
+                "rc-image-tile-wrapper-act",
+            );
             this.children[0].children[1].style.display = "none";
             this.dataset.btnact = "0";
         } else {
-            this.children[0].children[0].classList.add("rc-image-tile-wrapper-act");
+            this.children[0].children[0].classList.add(
+                "rc-image-tile-wrapper-act",
+            );
             this.children[0].children[1].style.display = "block";
             this.dataset.btnact = "1";
         }
     }
 
     function getVal() {
-        let elements = document.querySelectorAll('.rc-imageselect-tile');
+        let elements = document.querySelectorAll(".rc-imageselect-tile");
 
         let arr2 = imgData[imageList[index]];
 
@@ -108,18 +178,43 @@
                 test = false;
             }
         }
-        console.log((error/total)*100);
+        let percent = ((error / total) * 100);
+        console.log(percent);
+        calculateScore(percent, 10)
+
         reset();
     }
 
+    function calculateScore(percentage, timeTakenInSeconds) {
+        const maxScore = 300;
+        const correctnessExponentialFactor = 5; // Exponential factor for correctness component
+        const timeExponentialFactor = 9; // Exponential factor for time component
+        const timeMultiplier = 0.2; // Multiplier for time component
 
-    function reset(){
+        // Calculate correctness score non-linearly
+        const correctnessScore =
+            maxScore * Math.exp(-correctnessExponentialFactor * percentage);
+
+        // Calculate time score non-linearly
+        const timeScore =
+            maxScore *
+            Math.exp((-timeExponentialFactor * timeTakenInSeconds) / 60); // Exponential decay of score over time
+
+        // Combine correctness score and time score
+        const finalScore = (correctnessScore + timeScore) / 2;
+
+        finalScoreMain = finalScore;
+    }
+
+    function reset() {
         elapsedTime = 0;
-        let elements = document.querySelectorAll('.rc-imageselect-tile');
+        let elements = document.querySelectorAll(".rc-imageselect-tile");
 
-        elements.forEach(element => {
+        elements.forEach((element) => {
             // Remove class
-            element.children[0].children[0].classList.remove("rc-image-tile-wrapper-act");
+            element.children[0].children[0].classList.remove(
+                "rc-image-tile-wrapper-act",
+            );
             // Update style
             element.children[0].children[1].style.display = "none";
             // Update dataset
@@ -128,6 +223,16 @@
         genRandom();
     }
 </script>
+
+<svelte:head>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
+        rel="stylesheet"
+    />
+</svelte:head>
+
 <style>
     .mainDiv {
         display: flex;
@@ -136,10 +241,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #282C34;
+        background-color: #282c34;
     }
 
-    .text-timer{
+    .text-timer {
         font-size: 32px;
         margin: none;
         padding: none;
@@ -153,7 +258,6 @@
         background-color: white;
     }
 
-
     .imgt {
         border-collapse: separate;
         border-spacing: 0 0;
@@ -166,9 +270,7 @@
         transition-property: all;
         transition-timing-function: ease;
         width: 388px;
-
     }
-
 
     .image-select-payload {
         font-family: Roboto, helvetica, arial, sans-serif;
@@ -224,7 +326,7 @@
         margin: 0;
         padding: 1px;
         text-align: center;
-        transform: scale(1.0);
+        transform: scale(1);
     }
 
     .rc-imageselect-target {
@@ -233,7 +335,6 @@
         font-family: Roboto, helvetica, arial, sans-serif;
         position: relative;
         text-align: center;
-
     }
 
     :global(.rc-image-tile-wrapper) {
@@ -306,7 +407,6 @@
         border-top: 1px solid #cccccc;
     }
 
-
     .verify-button-holder {
         float: right;
         font-family: Roboto, helvetica, arial, sans-serif;
@@ -378,7 +478,6 @@
         margin: 6px 0 6px 6px;
     }
 
-
     .rc-button-reload {
         background-attachment: scroll;
         background-clip: border-box;
@@ -415,7 +514,7 @@
     }
 
     .rc-button:hover {
-        opacity: .8;
+        opacity: 0.8;
         outline: none;
     }
 
@@ -488,207 +587,435 @@
         width: 48px;
     }
 </style>
+
+
 <div class="mainDiv" on:keydown={handleKeyPress}>
-    <div class="text-timer">{formatTime(elapsedTime)}</div>
-    <div class="image-select" in:fade="{{delay: 0, duration: 200}}">
+    <div class="text-timer">{formatTime(elapsedTime)}</div> <div class="text-timer">{finalScoreMain}</div>
+
+    <div class="image-select" in:fade={{ delay: 0, duration: 200 }}>
         <div class="image-select-payload">
             <div class=".rc-imageselect-instructions">
                 <div class="rc-imageselect-desc-wrapper">
                     <div class="rc-imageselect-desc-no-canonical">
                         Select all squares with
-                        <strong style="font-size: 28px; display: block">{titleSelect}</strong>
+                        <strong style="font-size: 28px; display: block"
+                            >{titleSelect}</strong
+                        >
                         <!--                    <span class="rc-imageselect-carousel-instructions">If there are none, click skip</span>-->
                     </div>
                 </div>
             </div>
 
-
             <table class="imgt">
                 <tbody>
-                <tr>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="4">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:0%; left: 0%">
-                                <div class="rc-image-tile-overlay"></div>
+                    <tr>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="4"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:0%; left: 0%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="5" >
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:0%; left: -100%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="5"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:0%; left: -100%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="6">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:0%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="6"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:0%; left: -200%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="7">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:0%; left: -300%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="7"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:0%; left: -300%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="8">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-100%; left: 0%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="8"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-100%; left: 0%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="9">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-100%; left: -100%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="9"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-100%; left: -100%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="10">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-100%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="10"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-100%; left: -200%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="11">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-100%; left: -300%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="11"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-100%; left: -300%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="12">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-200%; left: 0%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="12"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-200%; left: 0%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="13">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-200%; left: -100%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="13"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-200%; left: -100%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="14">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-200%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="14"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-200%; left: -200%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="15">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-200%; left: -300%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="15"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-200%; left: -300%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="16">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: 0%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="16"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-300%; left: 0%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="17">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -100%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="17"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-300%; left: -100%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="18">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -200%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="18"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-300%; left: -200%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                    <td class="rc-imageselect-tile" data-btnact="0" on:click={handleClick} tabindex="19">
-                        <div class="rc-image-tile-target">
-                            <div class="rc-image-tile-wrapper" style="width: 95px; height: 95px"><img
-                                    alt=""
-                                    class="rc-image-tile-44" src={imgSrc}
-                                    style="top:-300%; left: -300%">
-                                <div class="rc-image-tile-overlay"></div>
+                        </td>
+                        <td
+                            class="rc-imageselect-tile"
+                            data-btnact="0"
+                            on:click={handleClick}
+                            tabindex="19"
+                        >
+                            <div class="rc-image-tile-target">
+                                <div
+                                    class="rc-image-tile-wrapper"
+                                    style="width: 95px; height: 95px"
+                                >
+                                    <img
+                                        alt=""
+                                        class="rc-image-tile-44"
+                                        src={imgSrc}
+                                        style="top:-300%; left: -300%"
+                                    />
+                                    <div class="rc-image-tile-overlay"></div>
+                                </div>
+                                <div
+                                    class="rc-imageselect-checkbox"
+                                    style="display: none"
+                                ></div>
                             </div>
-                            <div class="rc-imageselect-checkbox" style="display: none"></div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -698,42 +1025,71 @@
             <div class="primary-controls">
                 <div class="rc-buttons">
                     <div class="button-holder reload-button-holder">
-                        <button class="rc-button goog-inline-block rc-button-reload" id="recaptcha-reload-button"
-                                tabindex="3"
-                                title="Get a new challenge" value=""
-                                on:click={news}></button>
+                        <button
+                            class="rc-button goog-inline-block rc-button-reload"
+                            id="recaptcha-reload-button"
+                            tabindex="3"
+                            title="Get a new challenge"
+                            value=""
+                            on:click={news}
+                        ></button>
                     </div>
                     <div class="button-holder audio-button-holder">
-                        <button class="rc-button goog-inline-block rc-button-audio" id="recaptcha-audio-button"
-                                tabindex="1"
-                                title="Get an audio challenge" value=""></button>
+                        <button
+                            class="rc-button goog-inline-block rc-button-audio"
+                            id="recaptcha-audio-button"
+                            tabindex="1"
+                            title="Get an audio challenge"
+                            value=""
+                        ></button>
                     </div>
                     <div class="button-holder image-button-holder">
-                        <button class="rc-button goog-inline-block rc-button-image" id="recaptcha-image-button"
-                                style="display: none;"
-                                tabindex="0" title="Get a visual challenge" value=""></button>
+                        <button
+                            class="rc-button goog-inline-block rc-button-image"
+                            id="recaptcha-image-button"
+                            style="display: none;"
+                            tabindex="0"
+                            title="Get a visual challenge"
+                            value=""
+                        ></button>
                     </div>
                     <div class="button-holder help-button-holder">
-                        <button class="rc-button goog-inline-block rc-button-help" id="recaptcha-help-button"
-                                tabindex="2"
-                                title="Help" value=""></button>
+                        <button
+                            class="rc-button goog-inline-block rc-button-help"
+                            id="recaptcha-help-button"
+                            tabindex="2"
+                            title="Help"
+                            value=""
+                        ></button>
                     </div>
                     <div class="button-holder undo-button-holder">
-                        <button class="rc-button goog-inline-block rc-button-undo" id="recaptcha-undo-button"
-                                style="display: none;"
-                                tabindex="0"
-                                title="Undo" value=""></button>
+                        <button
+                            class="rc-button goog-inline-block rc-button-undo"
+                            id="recaptcha-undo-button"
+                            style="display: none;"
+                            tabindex="0"
+                            title="Undo"
+                            value=""
+                        ></button>
                     </div>
                 </div>
                 <div class="verify-button-holder">
-                    <button class="rc-button-default goog-inline-block" id="recaptcha-verify-button" on:click={submit}
-                            tabindex="0"
-                            title=""
-                            value="">Verify
+                    <button
+                        class="rc-button-default goog-inline-block"
+                        id="recaptcha-verify-button"
+                        on:click={submit}
+                        tabindex="0"
+                        title=""
+                        value=""
+                        >Verify
                     </button>
                 </div>
             </div>
-            <div class="rc-challenge-help" style="display:none" tabindex="0"></div>
+            <div
+                class="rc-challenge-help"
+                style="display:none"
+                tabindex="0"
+            ></div>
         </div>
     </div>
 </div>
