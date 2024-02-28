@@ -15,24 +15,32 @@
     let imgSrc;
     let index = 0;
 
+    let titleSelect = "test";
+    
+    
+
     let elapsedTime = 0;
     let interval;
 
     const imageList = ["bicycles-1.jpg", "bicycles-10.jpg", "bicycles-11.jpg", "bicycles-12.jpg", "bicycles-2.jpg", "bicycles-3.jpg", "bicycles-4.jpg", "bicycles-5.jpg", "bicycles-6.jpg", "bicycles-7.jpg", "bicycles-8.jpg", "bicycles-9.jpg", "buses-1.jpg", "buses-2.jpg", "buses-3.jpg", "buses-4.jpg", "buses-5.jpg", "buses-6.jpg", "buses-7.jpg", "buses-8.jpg", "crosswalks-1.jpg", "crosswalks-2.jpg", "crosswalks-3.jpg", "crosswalks-4.jpg", "crosswalks-5.jpg", "firehydrant-1.jpg", "firehydrant-2.jpg", "firehydrant-3.jpg", "firehydrant-4.jpg", "motorcycle-1.jpg", "motorcycle-10.jpg", "motorcycle-11.jpg", "motorcycle-12.jpg", "motorcycle-13.jpg", "motorcycle-14.jpg", "motorcycle-15.jpg", "motorcycle-16.jpg", "motorcycle-17.jpg", "motorcycle-2.jpg", "motorcycle-3.jpg", "motorcycle-4.jpg", "motorcycle-5.jpg", "motorcycle-6.jpg", "motorcycle-7.jpg", "motorcycle-8.jpg", "motorcycle-9.jpg", "stairs-1.jpg", "stairs-2.jpg", "stairs-3.jpg", "stairs-4.jpg", "stairs-5.jpg", "trafficlights-1.jpg", "trafficlights-10.jpg", "trafficlights-11.jpg", "trafficlights-12.jpg", "trafficlights-13.jpg", "trafficlights-14.jpg", "trafficlights-15.jpg", "trafficlights-2.jpg", "trafficlights-3.jpg", "trafficlights-4.jpg", "trafficlights-5.jpg", "trafficlights-6.jpg", "trafficlights-7.jpg", "trafficlights-8.jpg", "trafficlights-9.jpg"];
     onMount(() => {
+        // pre load images
+        for (let i = 0; i < imageList.length; i++) {
+            let img = new Image();
+            img.src = imageList[i];
+        }
+
         genRandom();
         interval = setInterval(() => {
             elapsedTime += 1; // Increment the elapsed time by 1 millisecond
-        }, 1); // Update every millisecond
+        }, 10); // Update every millisecond
         // Cleanup on component unmount
         return () => clearInterval(interval);
     });
 
     function formatTime(milliseconds) {
-        const minutes = Math.floor(milliseconds / (60 * 1000)).toString().padStart(2, '0');
-        const seconds = Math.floor((milliseconds / 1000) % 60).toString().padStart(2, '0');
-        const ms = Math.floor(milliseconds % 1000).toString().padStart(3, '0');
-        return `${minutes}:${seconds}.${ms}`;
+        const number = (milliseconds / 100).toFixed(2)
+        return `${number}`;
     }
 
     function handleKeyPress(event) {
@@ -51,7 +59,14 @@
         console.log(imgSrc)
     }
 
-    // $: imgSrc = `./images/${imageList[index]}`
+    $: if(imageList[index].includes("bicycles")) titleSelect = "Bicycles";
+    $: if(imageList[index].includes("buses")) titleSelect = "Buses";
+    $: if(imageList[index].includes("crosswalks")) titleSelect = "Crosswalks";
+    $: if(imageList[index].includes("firehydrant")) titleSelect = "Fire Hydrant";
+    $: if(imageList[index].includes("motorcycle")) titleSelect = "Motorcycles";
+    $: if(imageList[index].includes("stairs")) titleSelect = "Stairs";
+    $: if(imageList[index].includes("trafficlights")) titleSelect = "Traffic Lights";
+
 
     function news(){
         index++;
@@ -94,7 +109,6 @@
             }
         }
         console.log((error/total)*100);
-        // console.log(error);
         reset();
     }
 
@@ -125,10 +139,13 @@
         background-color: #282C34;
     }
 
-    p{
-        font-size: 24px;
+    .text-timer{
+        font-size: 32px;
+        margin: none;
+        padding: none;
         color: white;
         font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .image-select {
@@ -472,14 +489,14 @@
     }
 </style>
 <div class="mainDiv" on:keydown={handleKeyPress}>
-    <p>{formatTime(elapsedTime)}</p>
+    <div class="text-timer">{formatTime(elapsedTime)}</div>
     <div class="image-select" in:fade="{{delay: 0, duration: 200}}">
         <div class="image-select-payload">
             <div class=".rc-imageselect-instructions">
                 <div class="rc-imageselect-desc-wrapper">
                     <div class="rc-imageselect-desc-no-canonical">
                         Select all squares with
-                        <strong style="font-size: 28px; display: block">traffic lights</strong>
+                        <strong style="font-size: 28px; display: block">{titleSelect}</strong>
                         <!--                    <span class="rc-imageselect-carousel-instructions">If there are none, click skip</span>-->
                     </div>
                 </div>
