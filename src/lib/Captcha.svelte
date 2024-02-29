@@ -88,7 +88,7 @@
         // pre load images
         for (let i = 0; i < imageList.length; i++) {
             let img = new Image();
-            img.src = imageList[i];
+            img.src = `/images/${imageList[i]}`;
         }
 
         genRandom();
