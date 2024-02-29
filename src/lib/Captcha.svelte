@@ -16,6 +16,8 @@
 
     let finalScoreMain;
 
+    let shuffledArr;
+
     const imageList = [
         "bicycles-1.jpg",
         "bicycles-10.jpg",
@@ -91,6 +93,8 @@
             img.src = `/images/${imageList[i]}`;
         }
 
+        shuffledArr = shuffleArray(imageList);
+
         genRandom();
         interval = setInterval(() => {
             elapsedTime += 1; // Increment the elapsed time by 1 millisecond
@@ -112,10 +116,23 @@
         }
     }
 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        console.log(array);
+        return array;
+    }
+
+    let arrindex = 0;
+
     function genRandom() {
-        const randomIndex = Math.floor(Math.random() * imageList.length);
-        imgSrc = imageList[randomIndex];
-        index = randomIndex;
+        
+        arrindex++;
+        console.log(arrindex)
+        imgSrc = shuffledArr[arrindex];
+        index = arrindex;
         imgSrc = `./images/${imgSrc}`;
         console.log(imgSrc);
     }
@@ -123,12 +140,10 @@
     $: if (imageList[index].includes("bicycles")) titleSelect = "Bicycles";
     $: if (imageList[index].includes("buses")) titleSelect = "Buses";
     $: if (imageList[index].includes("crosswalks")) titleSelect = "Crosswalks";
-    $: if (imageList[index].includes("firehydrant"))
-        titleSelect = "Fire Hydrant";
+    $: if (imageList[index].includes("firehydrant"))titleSelect = "Fire Hydrant";
     $: if (imageList[index].includes("motorcycle")) titleSelect = "Motorcycles";
     $: if (imageList[index].includes("stairs")) titleSelect = "Stairs";
-    $: if (imageList[index].includes("trafficlights"))
-        titleSelect = "Traffic Lights";
+    $: if (imageList[index].includes("trafficlights"))titleSelect = "Traffic Lights";
 
     function news() {
         index++;
@@ -161,7 +176,7 @@
     function getVal() {
         let elements = document.querySelectorAll(".rc-imageselect-tile");
 
-        let arr2 = imgData[imageList[index]];
+        let arr2 = imgData[shuffledArr[index]];
 
         let test = true;
 
@@ -180,31 +195,37 @@
         }
         let percent = ((error / total) * 100);
         console.log(percent);
-        calculateScore(percent, 10)
+
+        calculateScore(percent, (elapsedTime / 100).toFixed(2))
 
         reset();
     }
 
+    //todo fix shitty scoring
     function calculateScore(percentage, timeTakenInSeconds) {
-        const maxScore = 300;
-        const correctnessExponentialFactor = 5; // Exponential factor for correctness component
-        const timeExponentialFactor = 9; // Exponential factor for time component
+        const maxScore = 500;
+        const correctnessExponentialFactor = 0.9; // Exponential factor for correctness component
+        const timeExponentialFactor = 4; // Exponential factor for time component
         const timeMultiplier = 0.2; // Multiplier for time component
 
         // Calculate correctness score non-linearly
-        const correctnessScore =
-            maxScore * Math.exp(-correctnessExponentialFactor * percentage);
+        
+    
+        const correctnessScore = maxScore * Math.exp(-correctnessExponentialFactor * percentage);
 
         // Calculate time score non-linearly
         const timeScore =
             maxScore *
-            Math.exp((-timeExponentialFactor * timeTakenInSeconds) / 60); // Exponential decay of score over time
+            Math.exp((-timeExponentialFactor * timeTakenInSeconds) / 20); // Exponential decay of score over time
 
         // Combine correctness score and time score
         const finalScore = (correctnessScore + timeScore) / 2;
 
-        finalScoreMain = finalScore;
+
+        // print(finalScore);
+        finalScoreMain += finalScore;
     }
+
 
     function reset() {
         elapsedTime = 0;
@@ -1031,7 +1052,6 @@
                             tabindex="3"
                             title="Get a new challenge"
                             value=""
-                            on:click={news}
                         ></button>
                     </div>
                     <div class="button-holder audio-button-holder">
