@@ -14,7 +14,7 @@
     let elapsedTime = 0;
     let interval;
 
-    let finalScoreMain;
+    let finalScoreMain = 0;
 
     let shuffledArr;
 
@@ -223,7 +223,7 @@
 
 
         // print(finalScore);
-        finalScoreMain += finalScore;
+        finalScoreMain += parseInt(finalScore.toFixed(0));
     }
 
 
