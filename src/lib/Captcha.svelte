@@ -90,7 +90,7 @@
         // pre load images
         for (let i = 0; i < imageList.length; i++) {
             let img = new Image();
-            img.src = `/images/${imageList[i]}`;
+            img.src = `/recaptcha-game/images/${imageList[i]}`;
         }
 
         shuffledArr = shuffleArray(imageList);
