@@ -63,7 +63,7 @@
 </style>
 
 <div class="main">
-    <div class="wrapper" in:fade="{{delay: 0, duration: 200}}">
+    <div class="wrapper" in:fade|global="{{delay: 0, duration: 200}}">
         <div class="text">Get Ready!</div>
         <div class="prog">
             <div class="inner" style="width: {$progress*100}%"></div>

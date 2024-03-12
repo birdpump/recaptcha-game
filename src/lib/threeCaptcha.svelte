@@ -393,7 +393,7 @@
     }
 </style>
 <div class="mainDiv">
-    <div class="image-select" in:fade="{{delay: 0, duration: 200}}">
+    <div class="image-select" in:fade|global="{{delay: 0, duration: 200}}">
         <div class="image-select-payload">
             <div class=".rc-imageselect-instructions">
                 <div class="rc-imageselect-desc-wrapper">

@@ -613,7 +613,7 @@
 <div class="mainDiv" on:keydown={handleKeyPress}>
     <div class="text-timer">{formatTime(elapsedTime)}</div> <div class="text-timer">{finalScoreMain}</div>
 
-    <div class="image-select" in:fade={{ delay: 0, duration: 200 }}>
+    <div class="image-select" in:fade|global={{ delay: 0, duration: 200 }}>
         <div class="image-select-payload">
             <div class=".rc-imageselect-instructions">
                 <div class="rc-imageselect-desc-wrapper">
