@@ -86,6 +86,7 @@
         "trafficlights-8.jpg",
         "trafficlights-9.jpg",
     ];
+
     onMount(() => {
         // pre load images
         for (let i = 0; i < imageList.length; i++) {
@@ -128,7 +129,7 @@
     let arrindex = 0;
 
     function genRandom() {
-        
+
         arrindex++;
         console.log(arrindex)
         imgSrc = shuffledArr[arrindex];
@@ -209,8 +210,8 @@
         const timeMultiplier = 0.2; // Multiplier for time component
 
         // Calculate correctness score non-linearly
-        
-    
+
+
         const correctnessScore = maxScore * Math.exp(-correctnessExponentialFactor * percentage);
 
         // Calculate time score non-linearly
